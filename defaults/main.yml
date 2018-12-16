@@ -1,5 +1,5 @@
 # defaults file for jailed
-jail_build_server_enabled: false
+jail_build_server_enabled: no
 jail_build_server_pubkey: 'poudriere.pub'
 jail_build_server_url: ''
 

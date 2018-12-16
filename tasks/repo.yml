@@ -20,7 +20,8 @@
   register: build_server_repo
 
 - name: Update build server repo data
-  command: pkg -c {{ jail_home.stdout }} update
+  command: |
+    pkg -c {{ jail_home.stdout }} update
   when: build_server_repo | changed
 
 - name: Install root certificate authorities

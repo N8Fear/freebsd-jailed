@@ -1,23 +1,26 @@
 - debug: msg='Running tasks for jail {{ jail_name }}'
 
 - name: Check if jail already exists
-  shell: /usr/local/bin/iocage get boot {{ jail_name }}
-  ignore_errors: true
+  command: |
+    /usr/local/bin/iocage get boot {{ jail_name }}
+  ignore_errors: yes
   changed_when: false
   register: jail_exists
 
 - name: Create jail
-  command: /usr/local/bin/iocage create \
-    --name {{ jail_name }} \
-    --release {{ jail_freebsd_release }}
+  command: |
+    /usr/local/bin/iocage create \
+      --name {{ jail_name }} \
+      --release {{ jail_freebsd_release }}
   when: jail_exists is failed
   register: jail_created
   notify:
     - Start iocage
 
 - name: Set jail properties
-  command: /usr/local/bin/iocage set {{ item }} {{ jail_name }}
-  with_items:
+  command: |
+    /usr/local/bin/iocage set {{ item }} {{ jail_name }}
+  loop:
     - 'boot=on'
     - 'vnet=off'
     - 'resolver={{ jail_net_resolver }}'
@@ -25,7 +28,8 @@
   when: jail_created is changed
 
 - name: Register home diretory
-  command: echo {{ host_ioc_jails_dir }}/{{ jail_name }}/root
+  command: |
+    echo {{ host_ioc_jails_dir }}/{{ jail_name }}/root
   changed_when: false
   register: jail_home
 

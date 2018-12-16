@@ -2,7 +2,7 @@ galaxy_info:
   author: Joerg Fiedler
   description: Provides a jail.
   license: BSD
-  min_ansible_version: 2.6.1
+  min_ansible_version: 2.7.0
   platforms:
   - name: FreeBSD
     versions:
@@ -15,4 +15,4 @@ galaxy_info:
   - ec2
 allow_duplicates: yes
 dependencies:
-- { role: JoergFiedler.freebsd-jail-host }
+  - JoergFiedler.freebsd-jail-host
