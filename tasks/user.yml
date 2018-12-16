@@ -1,5 +1,6 @@
 - name: Update root user
   lineinfile:
+    backup: '{{ jail_backup_old_files }}'
     dest: '{{ jail_home.stdout }}/etc/master.passwd'
     line: 'root:*:0:0::0:0:root at {{ jail_name }}:/root:/bin/csh'
     regexp: '^root:.*'

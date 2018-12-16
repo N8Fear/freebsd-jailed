@@ -1,5 +1,6 @@
 - name: Configure syslog
   lineinfile:
+    backup: '{{ jail_backup_old_files }}'
     dest: '{{ jail_home.stdout }}/etc/syslog.conf'
     state: present
     line: '*.*      @{{ syslogd_server }}'
@@ -9,6 +10,7 @@
 
 - name: Enable remote syslog logging
   lineinfile:
+    backup: '{{ jail_backup_old_files }}'
     dest: '{{ jail_home.stdout }}/etc/rc.conf'
     regexp: 'syslogd_flags='
     line: 'syslogd_flags="-c -s"'

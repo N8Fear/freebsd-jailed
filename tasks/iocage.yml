@@ -35,6 +35,7 @@
 
 - name: Copy default resolv.conf
   copy:
+    backup: '{{ jail_backup_old_files }}'
     src: '/etc/resolv.conf'
     dest: '{{ jail_home.stdout }}/etc/resolv.conf'
     remote_src: true
@@ -42,6 +43,7 @@
 
 - name: Update resolv.conf
   replace:
+    backup: '{{ jail_backup_old_files }}'
     path: '{{ jail_home.stdout }}/etc/resolv.conf'
     regexp: '(nameserver\s+).*$'
     replace: '\1{{ jail_net_resolver }}'

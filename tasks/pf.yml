@@ -1,5 +1,6 @@
 - name: Make sure old pf configuration file for nat is gone
   file:
+    backup: '{{ jail_backup_old_files }}'
     path: '/etc/pf.anchor.nat-jail.{{ jail_name }}-dns.conf'
     state: absent
   notify:
@@ -7,6 +8,7 @@
 
 - name: Remove old pf configuration file from configuration
   lineinfile:
+    backup: '{{ jail_backup_old_files }}'
     dest: '/etc/pf.anchor.nat-jail.conf'
     state: absent
     line: 'include "/etc/pf.anchor.nat-jail.{{ jail_name }}-dns.conf"'
@@ -15,6 +17,7 @@
 
 - name: Copy pf configuration (nat)
   template:
+    backup: '{{ jail_backup_old_files }}'
     src: 'pf.anchor.nat-jail.conf.j2'
     dest: '/etc/pf.anchor.nat-jail.{{ jail_name }}-jailed.conf'
   notify:
@@ -22,6 +25,7 @@
 
 - name: Add pf configuration to anchor.nat-jail conf
   lineinfile:
+    backup: '{{ jail_backup_old_files }}'
     dest: '/etc/pf.anchor.nat-jail.conf'
     state: present
     line: 'include "/etc/pf.anchor.nat-jail.{{ jail_name }}-jailed.conf"'
@@ -30,6 +34,7 @@
 
 - name: Copy pf configuration (rls)
   template:
+    backup: '{{ jail_backup_old_files }}'
     src: 'pf.anchor.rls-jail.conf.j2'
     dest: '/etc/pf.anchor.rls-jail.{{ jail_name }}-jailed.conf'
   notify:
@@ -37,6 +42,7 @@
 
 - name: Add pf configuration to anchor.rls-jail conf
   lineinfile:
+    backup: '{{ jail_backup_old_files }}'
     dest: '/etc/pf.anchor.rls-jail.conf'
     line: 'include "/etc/pf.anchor.rls-jail.{{ jail_name }}-jailed.conf"'
     state: present

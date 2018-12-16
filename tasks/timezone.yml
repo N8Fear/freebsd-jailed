@@ -1,5 +1,6 @@
 - name: Read current timezone info
-  command: cat {{ jail_home.stdout }}/var/db/zoneinfo
+  command: |
+    cat {{ jail_home.stdout }}/var/db/zoneinfo
   register: zoneinfo
   changed_when: false
   ignore_errors: true

@@ -1,3 +1,5 @@
+{{ ansible_managed | comment }}
+
 # send off mail via ssmtp_mailhub
 pass out log on {{ host_net_int_if }} proto tcp \
   from {{ jail_net_ip }} \

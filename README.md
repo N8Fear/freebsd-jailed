@@ -22,9 +22,9 @@ The name for the jail. Local part of the hostname. Default: `'{{ jail_net_ip }}'
 
 Domain part of the hostname. Default: `'darkcity'`.
 
-##### jail_hostname
+##### jail_backup_old_files
 
-The jail's hostname. Default: `'{{ jail_name }}.{{ jail_domain }}'`
+Set to `yes` if you want to create backup file for file modifications done by Ansible. Default: `no`.
 
 ##### jail_freebsd_release
 
@@ -51,15 +51,15 @@ not set messages stay with local syslog. No default value.
 
 This feature is only active if the variable `use_syslogd_server` is set.
 
-##### host_build_server_enabled
+##### jail_build_server_enabled
 
-Use own build server repository to install customized build ports. Default: `false`
+Use own build server repository to install customized build ports. Default: `no`
 
-##### host_build_server_url
+##### jail_build_server_url
 
 The build server repo http url. Default: `''`
 
-##### host_build_server_pubkey
+##### jail_build_server_pubkey
 
 The public key to use to verify signatures. Default: `'poudriere.pub'`
 
@@ -71,7 +71,7 @@ Dependencies
 Example Playbook
 ----------------
 
-			- hosts: all
+	  - hosts: all
         become: true
       
         vars:
