@@ -16,4 +16,3 @@
   command: |
     pwd_mkdb -p -d {{ jail_home.stdout }}/etc {{ jail_home.stdout }}/etc/master.passwd
   when: root_updated is changed
-

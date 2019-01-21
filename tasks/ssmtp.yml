@@ -3,6 +3,8 @@
     name: 'ssmtp'
     state: present
     chroot: '{{ jail_home.stdout }}'
+  register: pkg_result
+  until: pkg_result is succeeded
 
 - name: Copy ssmtp.conf into place
   template:
