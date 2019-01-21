@@ -1,3 +1,8 @@
+- import_role:
+    name: JoergFiedler.freebsd-jail-host
+  tags:
+    - jailed
+
 - import_tasks: iocage.yml
   tags:
     - jailed
