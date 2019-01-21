@@ -5,4 +5,3 @@
     state: present
     line: '{{ ifconfig_net_if_line }}'
   notify: Activate network config
-
