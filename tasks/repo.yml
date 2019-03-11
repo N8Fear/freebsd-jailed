@@ -34,4 +34,3 @@
   command: |
     pkg -c {{ jail_home.stdout }} update
   when: build_server_repo is changed
-
