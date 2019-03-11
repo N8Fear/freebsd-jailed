@@ -1,6 +1,10 @@
 - import_tasks: iocage.yml
   tags:
     - jailed
+- import_tasks: unbound.yml
+  tags:
+    - unbound
+  when: jail_net_resolver != 'none'
 - import_tasks: net.yml
   tags:
     - jailed

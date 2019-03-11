@@ -2,6 +2,7 @@
   pkgng:
     name: 'ca_root_nss'
     state: present
+    chroot: '{{ jail_home.stdout }}'
   register: pkg_result
   until: pkg_result is succeeded
 

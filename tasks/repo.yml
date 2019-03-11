@@ -21,15 +21,17 @@
     dest: '{{ jail_home.stdout }}/usr/local/etc/pkg/repos/poudriere.conf'
   register: build_server_repo
 
+- name: Disable FreeBSD offical repo
+  lineinfile:
+    backup: '{{ jail_backup_old_files }}'
+    dest: '{{ jail_home.stdout }}/etc/pkg/FreeBSD.conf'
+    line: '  enabled: no'
+    regexp: '^\s+enabled:\s'
+    state: present
+  register: build_server_repo
+
 - name: Update build server repo data
   command: |
     pkg -c {{ jail_home.stdout }} update
   when: build_server_repo is changed
 
-- name: Install root certificate authorities
-  pkgng:
-    name: 'ca_root_nss'
-    state: present
-    chroot: '{{ jail_home.stdout }}'
-  register: pkg_result
-  until: pkg_result is succeeded

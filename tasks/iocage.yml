@@ -23,7 +23,7 @@
   loop:
     - 'boot=on'
     - 'vnet=off'
-    - 'resolver={{ jail_net_resolver }}'
+    - 'resolver="{{ jail_net_resolver }}"'
     - 'ip4_addr=lo0|{{ jail_net_ip }}/32'
   when: jail_created is changed
 
@@ -40,11 +40,3 @@
     dest: '{{ jail_home.stdout }}/etc/resolv.conf'
     remote_src: true
   when: jail_created is changed
-
-- name: Update resolv.conf
-  replace:
-    backup: '{{ jail_backup_old_files }}'
-    path: '{{ jail_home.stdout }}/etc/resolv.conf'
-    regexp: '(nameserver\s+).*$'
-    replace: '\1{{ jail_net_resolver }}'
-  when: jail_net_resolver != 'none'

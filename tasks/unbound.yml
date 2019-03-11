@@ -1,0 +1,25 @@
+- name: Activate unbound
+  lineinfile:
+    backup: '{{ jail_backup_old_files }}'
+    path: '{{ jail_home.stdout }}/etc/rc.conf'
+    regexp: '^local_unbound_enable='
+    line: 'local_unbound_enable="YES"'
+
+- name: Copy unbound config
+  template:
+    backup: '{{ jail_backup_old_files }}'
+    src: 'unbound/unbound.conf.j2'
+    dest: '{{ jail_home.stdout }}/var/unbound/unbound.conf'
+
+- name: Copy unbound config
+  template:
+    backup: '{{ jail_backup_old_files }}'
+    src: 'unbound/conf.d/unbound.conf.j2'
+    dest: '{{ jail_home.stdout }}/var/unbound/conf.d/unbound.conf'
+
+- name: Load trust root key
+  command: |
+    /usr/sbin/unbound-anchor -a /iocage/jails/{{ jail_name }}/root/var/unbound/root.key
+  args:
+    creates: '/iocage/jails/{{ jail_name }}/root/var/unbound/root.key'
+  ignore_errors: yes

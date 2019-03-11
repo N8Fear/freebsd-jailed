@@ -1,0 +1,17 @@
+server:
+        username: unbound
+        directory: /var/unbound
+        chroot: /var/unbound
+        pidfile: /var/run/local_unbound.pid
+        auto-trust-anchor-file: /var/unbound/root.key
+
+        # lan zones
+        unblock-lan-zones: yes
+        insecure-lan-zones: yes
+
+remote-control:
+        control-enable: yes
+        control-interface: /var/run/local_unbound.ctl
+        control-use-cert: no
+        
+include: /var/unbound/conf.d/*.conf

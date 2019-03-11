@@ -1,0 +1,12 @@
+{{ ansible_managed | comment }}
+
+server:
+        access-control: {{ jail_net_ip }}/8 allow
+        access-control: 127.0.0.0/8 allow
+        cache-max-ttl: 14400
+        cache-min-ttl: 300
+        hide-identity: yes
+        hide-version: yes
+        prefetch: yes
+        qname-minimisation: yes
+        verbosity: 2
